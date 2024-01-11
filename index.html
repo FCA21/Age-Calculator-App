@@ -1,37 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
+
   <title>Frontend Mentor | Age calculator app</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+  <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
+  <!--Contenedor-->
+  <main class="container" role="main">
+    <div class="content">
+      <!--Introduce fecha de nacimiento-->
+      <div class="input">
+        <!--Día-->
+        <div>
+          <h6>Día</h6>
+          <input type="text" placeholder="Day" id="dayIn">
+          <p class="error"></p>
+        </div>
+        <!--Mes-->
+        <div>
+          <h6>Mes</h6>
+          <input type="text" placeholder="Month" id="monthIn">
+          <p class="error"></p>
+        </div>
+        <!--Año-->
+        <div>
+          <h6>Año</h6>
+          <input type="text" placeholder="Year" id="yearIn">
+          <p class="error"></p>
+        </div>
+      </div>
+      <!--botón-->
+      <hr>
+      <button id="btn">
+        <img src="./assets/images/icon-arrow.svg" alt="">
+      </button>
 
-  Day
-  DD
+      <!--Resultado-->
+      <div class="result">
+        <h1><span id="yearOut">--</span>años</h1>
+        <h1><span id="monthOut">--</span>meses</h1>
+        <h1><span id="dayOut">--</span>días</h1>
+      </div>
+    </div>
+  </main>
 
-  Month
-  MM
 
-  Year
-  YYYY
+  <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="#">Fernando Castro Álamo</a>.
+  </footer>
 
-  -- years
-  -- months
-  -- days
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+
+  <script src="main.js" defer></script>
 </body>
+
 </html>

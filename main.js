@@ -1,19 +1,23 @@
 const dayIn = document.getElementById('dayIn');
 const monthIn = document.getElementById('monthIn');
 const yearIn = document.getElementById('yearIn');
-const dayout = document.getElementById('dayout');
-const monthout = document.getElementById('monthout');
-const yearout = document.getElementById('yearout');
+const dayOut = document.getElementById('dayOut');
+const monthOut = document.getElementById('monthOut');
+const yearOut = document.getElementById('yearOut');
 const btn = document.getElementById('btn');
 const errorStyle = '0.5px solid var (--Light-red)';
-const day = dayIn.value;
-const month = monthIn.value;
-const year = yearIn.value;
-const birthday = `${year}-${month}-${day}`;
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+
 
 btn.addEventListener('click', (e) => {
     e.preventDefault();
-
+    const day = dayIn.value;
+    const month = monthIn.value;
+    const year = yearIn.value;
+    const birthday = `${year}-${month}-${day}`;
+    
     if (validateDay() && validateMonth() && validateYear()) {
         console.log('Valid');
     } else {
@@ -29,12 +33,12 @@ btn.addEventListener('click', (e) => {
     }
 
     if(days < 0) {
-        days += getNoOfDays(year, month - 1);
+        days += getNoOfDays(year, month);
     }
 
-    dayout.innerText = days;
-    monthout.innerText = months;
-    yearout.innerText = years;
+    dayOut.innerText = days;
+    monthOut.innerText = months;
+    yearOut.innerText = years;
 });
 
 
@@ -48,10 +52,11 @@ dayIn.addEventListener('blur', () => {
 
 const validateDay = () => {
     if (dayIn.value < 1 || dayIn.value > 31) {
-        dayIn.style.border = errorStyle;
+        showError(dayIn, 'Must be between 1 and 31', errorStyle);
         return false;
-    } else {
-        dayIn.style.border = 'none';
+    }  
+    else {
+       // hideError(dayIn);
         return true;
     }
 };
@@ -62,10 +67,10 @@ monthIn.addEventListener('blur', () => {
 
 const validateMonth = () => {
     if (monthIn.value < 1 || monthIn.value > 12) {
-        monthIn.style.border = errorStyle;
+        showError(monthIn, 'Must be between 1 and 12', errorStyle);
         return false;
     } else {
-        monthIn.style.border = 'none';
+        //hideError(monthIn);
         return true;
     }
 };
@@ -76,9 +81,9 @@ yearIn.addEventListener('blur', () => {
 
 const validateYear = () => {
     if (yearIn.value < 1900 || yearIn.value > new Date().getFullYear()) {
-        yearIn.style.border = errorStyle;
+        showerror (yearIn, 'Must be between 1900 and the current year', errorStyle);
         return false;
-    } else if (year =='') {
+    } else if (yearIn =='') {
         showMessage(yearIn, 'This field is required', errorStyle);
         return false;
     } else {
@@ -86,3 +91,37 @@ const validateYear = () => {
         return true;
     }
 };
+
+//validamos el día
+
+function validDay(year, month, day) {
+    if (day < 1 || day > getNoOfDays(year, month)) return false;
+    return true;
+    }
+
+    //validamos mes
+
+    function validMonth(month) {
+        if (month < 1 || month > 12) return false;
+        return true;
+    }
+
+
+    //validamos año
+
+    function validYear(year, month, day) {
+        const secondDate = new Date();
+        const firstDate = new Date(`${year}-${month}-${day}`);
+        if (firstDate.setHours(0, 0, 0, 0) <= secondDate.setHours(0, 0, 0, 0)) return true;
+        return false;
+    }
+
+    //mensaje
+
+    function showError(input, message) {
+        input.style.border = errorStyle;
+        input.nextElementSibling.innerText = message;
+        input.nextElementSibling.style.color = 'red';
+    }
+
+});
